@@ -5,6 +5,11 @@ import textblob
 import google.generativeai as genai
 import os
 
+api = os.getenv("makersuite")
+genai.configure(api_key=api)
+model = genai.GenerativeModel("gemini-1.5-flash")
+
+
 app = Flask(__name__)
 
 @app.route("/", methods = ["GET", "POST"])
@@ -33,11 +38,6 @@ def AI():
 
 @app.route("/AI_result", methods = ["GET", "POST"])
 def AI_result():
-    
-    api = os.getenv("makersuite")
-    genai.configure(api_key=api)
-    model = genai.GenerativeModel("gemini-1.5-flash")
-
     q = request.form.get('q')
     r = model.generate_content(q)
     return(render_template('GenAI_result.html',r=r))
