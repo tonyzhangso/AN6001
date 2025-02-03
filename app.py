@@ -25,6 +25,11 @@ def main():
 def SA():
     return(render_template('SA.html'))
 
+@app.route("/PAYNOW", methods = ["GET", "POST"])
+def PAYNOW():
+    return(render_template('paynow.html'))
+
+
 @app.route("/SA_result", methods = ["GET", "POST"])
 def SA_result():
     q = request.form.get('q')
